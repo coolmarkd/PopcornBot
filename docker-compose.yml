@@ -1,0 +1,22 @@
+services:
+  popcornbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: popcornbot
+    restart: unless-stopped
+    env_file:
+      - .env
+    # Note: env_file loads variables from .env
+    # If you want to override from host environment, uncomment below:
+    # environment:
+    #   - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+    #   - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+    # No volumes needed - bot state is in-memory
+    # Logs go to stdout/stderr automatically
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
